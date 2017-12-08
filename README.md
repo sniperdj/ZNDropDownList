@@ -13,12 +13,11 @@ Init
 @Require
 ```
     #pragma mark - ZNDropDownListDataSource
-    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    - (NSInteger)numberOfRowsIndropDownList:(ZNDropDownList *)dropDownList {
         return self.arrayList.count;
     }
-
     static NSString *reuseId = @"com.RootViewController.UITableViewCell";
-    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    - (UITableViewCell *)dropDownList:(ZNDropDownList *)dropDownList tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
