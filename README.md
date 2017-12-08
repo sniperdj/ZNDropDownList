@@ -2,8 +2,7 @@
 
 Use it like a UITableView
 
-###Init
-
+Init
 ```
     ZNDropDownList *dropDownList = [[ZNDropDownList alloc] initWithFrame:CGRectMake(100, 100, 120, 40)];
     [self.view addSubview:dropDownList];
@@ -11,6 +10,7 @@ Use it like a UITableView
     dropDownList.delegate = self;
 ```
 
+@Require
 ```
     #pragma mark - ZNDropDownListDataSource
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
