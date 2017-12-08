@@ -33,12 +33,11 @@
 }
 
 #pragma mark - ZNDropDownListDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfRowsIndropDownList:(ZNDropDownList *)dropDownList {
     return self.arrayList.count;
 }
-
 static NSString *reuseId = @"com.RootViewController.UITableViewCell";
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)dropDownList:(ZNDropDownList *)dropDownList tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
@@ -47,6 +46,7 @@ static NSString *reuseId = @"com.RootViewController.UITableViewCell";
     cell.textLabel.text = self.arrayList[indexPath.row];
     return cell;
 }
+
 #pragma mark - ZNDropDownListDelegate
 - (NSString *)dropDownList:(ZNDropDownList *)dropDownList didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.arrayList[indexPath.row];

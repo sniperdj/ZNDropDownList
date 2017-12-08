@@ -34,7 +34,11 @@ typedef NS_ENUM(NSUInteger, ZNDropDownListStyle) {
 
 @end
 
-@protocol ZNDropDownListDataSource <UITableViewDataSource>
+@protocol ZNDropDownListDataSource <NSObject>
+
+- (NSInteger)numberOfRowsIndropDownList:(ZNDropDownList *)dropDownList;
+
+- (UITableViewCell *)dropDownList:(ZNDropDownList *)dropDownList tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

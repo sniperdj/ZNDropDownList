@@ -10,7 +10,7 @@
 
 #define KEY_WINDOW [UIApplication sharedApplication].keyWindow
 
-@interface ZNDropDownList ()<UITextFieldDelegate, UITableViewDelegate>
+@interface ZNDropDownList ()<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 /** 输入框 */
 @property (nonatomic, strong)UITextField *dropDownTxt;
@@ -57,10 +57,6 @@
     _cellHeight = 40;
 }
 
-- (void)setDataSource:(id<ZNDropDownListDataSource>)dataSource {
-    _listView.dataSource = dataSource;
-}
-
 #pragma mark - UIControlEvent
 - (void)coverBtnClick:(UIButton *)btn {
     _listView.hidden = TRUE;
@@ -80,6 +76,16 @@
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     [self showDropDownList:nil];
     return FALSE;
+}
+
+#pragma mark - UITableViewDatasource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+static NSString *reuseId = @"com.RootViewController.UITableViewCell";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.dataSource dropDownList:self tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 #pragma mark - UITableViewDelegate
@@ -125,6 +131,7 @@
     _listView.layer.cornerRadius = 6;
     _listView.clipsToBounds = TRUE;
     _listView.delegate = self;
+    _listView.dataSource = self;
     
     _coverBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _coverBtn.frame = [UIScreen mainScreen].bounds;
