@@ -16,29 +16,30 @@ typedef NS_ENUM(NSUInteger, ZNDropDownListStyle) {
     ZNDropDownListUpStyle
 };
 
+@protocol ZNDropDownListDataSource <NSObject>
+
+- (NSInteger)numberOfRowsIndropDownList:(ZNDropDownList *)dropDownList;
+
+- (UITableViewCell *)dropDownList:(ZNDropDownList *)dropDownList tableView:(UITableView *)tableView cellForRowAtIndex:(NSInteger)rowIndex;
+
+@end
+
 @protocol ZNDropDownListDelegate <NSObject>
 
-- (NSString *)dropDownList:(ZNDropDownList *)dropDownList didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+@required
+- (NSString *)dropDownList:(ZNDropDownList *)dropDownList didSelectRowAtIndex:(NSInteger)rowIndex;
 
 @optional
 // return Default text in DropDownText
 - (NSString *)defaultDropDownTextInDropDownList:(ZNDropDownList *)dropDownList;
 // return DropDownList cell height
-- (CGFloat)dropDownList:(ZNDropDownList *)dropDownList heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)dropDownList:(ZNDropDownList *)dropDownList heightForRowAtIndex:(NSInteger)rowIndex;
 
-- (void)dropDownList:(ZNDropDownList *)dropDownList didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)dropDownList:(ZNDropDownList *)dropDownList didDeselectRowAtIndex:(NSInteger)rowIndex;
 // return the Image in the right of DropDownListText
 - (UIImage *)imageOfDropDownTxt;
 
 - (ZNDropDownListStyle)styleInDropDownList:(ZNDropDownList *)dropDownList;
-
-@end
-
-@protocol ZNDropDownListDataSource <NSObject>
-
-- (NSInteger)numberOfRowsIndropDownList:(ZNDropDownList *)dropDownList;
-
-- (UITableViewCell *)dropDownList:(ZNDropDownList *)dropDownList tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

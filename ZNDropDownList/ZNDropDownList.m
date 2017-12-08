@@ -80,32 +80,36 @@
 
 #pragma mark - UITableViewDatasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return [self.dataSource numberOfRowsIndropDownList:self];
 }
 
 static NSString *reuseId = @"com.RootViewController.UITableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.dataSource dropDownList:self tableView:tableView cellForRowAtIndexPath:indexPath];
+    NSInteger row = indexPath.row;
+    return [self.dataSource dropDownList:self tableView:tableView cellForRowAtIndex:row];
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    _dropDownTxt.text = [self.delegate dropDownList:self didSelectRowAtIndexPath:indexPath];
+    NSInteger row = indexPath.row;
+    _dropDownTxt.text = [self.delegate dropDownList:self didSelectRowAtIndex:row];
     
     [self coverBtnClick:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.delegate respondsToSelector:@selector(dropDownList:heightForRowAtIndexPath:)]) {
-        return [self.delegate dropDownList:self heightForRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(dropDownList:heightForRowAtIndex:)]) {
+        NSInteger row = indexPath.row;
+        return [self.delegate dropDownList:self heightForRowAtIndex:row];
     } else {
         return _cellHeight; 
     }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.delegate respondsToSelector:@selector(dropDownList:didDeselectRowAtIndexPath:)]) {
-        [self.delegate dropDownList:self didDeselectRowAtIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(dropDownList:didDeselectRowAtIndex:)]) {
+        NSInteger row = indexPath.row;
+        [self.delegate dropDownList:self didDeselectRowAtIndex:row];
     }
 }
 
